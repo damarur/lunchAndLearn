@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">Device Control</string>
+    <string name="title_activity_main">Device Control</string>
+    <string name="package_name">com.mimacom.devicecontrol</string>
+    <string name="custom_url_scheme">com.mimacom.devicecontrol</string>
+</resources>
