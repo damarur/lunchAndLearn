@@ -13,10 +13,72 @@
     </ion-toolbar>
   </ion-header>
   <ion-list>
-    <ion-item>
-      <ion-label>Bateria:
-        <ng-container *ngIf="batteryInfo.batteryLevel">{{batteryInfo.batteryLevel * 100}}%</ng-container>
+    <ion-item *ngIf="battery">
+      <ion-label><b>Bateria:</b> {{battery.batteryLevel * 100}}%
+        <ion-icon *ngIf="battery.isCharging" name="battery-charging-outline"></ion-icon>
+        <ion-icon *ngIf="!battery.isCharging && battery.batteryLevel <= 0.1" name="battery-dead-outline"></ion-icon>
+        <ion-icon *ngIf="!battery.isCharging && battery.batteryLevel >= 0.9" name="battery-full-outline"></ion-icon>
+        <ion-icon *ngIf="!battery.isCharging && battery.batteryLevel > 0.1 && battery.batteryLevel < 0.9" name="battery-half-outline"></ion-icon>
       </ion-label>
     </ion-item>
+    <ion-item *ngIf="deviceId">
+      <ion-label><b>Id:</b> {{deviceId.uuid}}</ion-label>
+    </ion-item>
+    <ion-item *ngIf="languageCode">
+      <ion-label><b>Idioma (code):</b> {{languageCode.value}}</ion-label>
+    </ion-item>
+    <ion-item *ngIf="languageTag">
+      <ion-label><b>Idioma (tag):</b> {{languageTag.value}}</ion-label>
+    </ion-item>
+    <ng-container *ngIf="device">
+      <ion-item *ngIf="device.name">
+        <ion-label><b>Nombre:</b> {{device.name}}</ion-label>
+      </ion-item>
+      <ion-item *ngIf="device.model">
+        <ion-label><b>Modelo:</b> {{device.model}}</ion-label>
+      </ion-item>
+      <ion-item *ngIf="device.platform">
+        <ion-label><b>Plataforma:</b> {{device.platform}}</ion-label>
+      </ion-item>
+      <ion-item *ngIf="device.operatingSystem">
+        <ion-label><b>Sistema Operativo:</b> {{device.operatingSystem}}</ion-label>
+      </ion-item>
+      <ion-item *ngIf="device.osVersion">
+        <ion-label><b>Versión OS:</b> {{device.osVersion}}</ion-label>
+      </ion-item>
+      <ion-item *ngIf="device.manufacturer">
+        <ion-label><b>Fabricante:</b> {{device.manufacturer}}</ion-label>
+      </ion-item>
+      <ion-item>
+        <ion-label *ngIf="device.isVirtual"><b>Emulador:</b> SI</ion-label>
+        <ion-label *ngIf="!device.isVirtual"><b>Emulador:</b> NO</ion-label>
+      </ion-item>
+      <ion-item *ngIf="device.memUsed">
+        <ion-label><b>Memoria usada:</b> {{device.memUsed / (1024 * 1024)}} MB</ion-label>
+      </ion-item>
+      <ion-item *ngIf="device.realDiskFree">
+        <ion-label><b>Espacio libre:</b> {{device.realDiskFree / (1024 * 1024 * 1024)}} GB</ion-label>
+      </ion-item>
+      <ion-item *ngIf="device.realDiskTotal">
+        <ion-label><b>Espacio total:</b> {{device.realDiskTotal / (1024 * 1024 * 1024)}} GB</ion-label>
+      </ion-item>
+      <ion-item *ngIf="device.webViewVersion">
+        <ion-label><b>Versión WebView:</b> {{device.webViewVersion}}</ion-label>
+      </ion-item>
+    </ng-container>
+    <ion-item *ngIf="connectionStatus">
+      <ion-label *ngIf="connectionStatus.connectionType === 'wifi'"><b>Conectado con Wifi</b> <ion-icon name="wifi-outline"></ion-icon></ion-label>
+      <ion-label *ngIf="connectionStatus.connectionType === 'cellular'"><b>Conectado con Datos</b> <ion-icon name="cellular-outline"></ion-icon></ion-label>
+      <ion-label *ngIf="connectionStatus.connectionType === 'none'"><b>Sin conexión</b> <ion-icon name="airplane-outline"></ion-icon></ion-label>
+      <ion-label *ngIf="connectionStatus.connectionType === 'unknown'"><b>No se sabe</b> <ion-icon name="build-outline"></ion-icon></ion-label>
+    </ion-item>
+    <ng-container *ngIf="geolocation">
+      <ion-item *ngIf="geolocation.coords">
+        <ion-label><b>Latitud:</b> {{geolocation.coords.latitude}}</ion-label>
+      </ion-item>
+      <ion-item *ngIf="geolocation.coords">
+        <ion-label><b>Longitud:</b> {{geolocation.coords.longitude}}</ion-label>
+      </ion-item>
+    </ng-container>
   </ion-list>
 </ion-content>
