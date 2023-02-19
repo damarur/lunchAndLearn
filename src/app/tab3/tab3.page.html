@@ -1,7 +1,7 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title>
-      Tab 3
+      Galería
     </ion-title>
   </ion-toolbar>
 </ion-header>
@@ -9,7 +9,14 @@
 <ion-content [fullscreen]="true">
   <ion-header collapse="condense">
     <ion-toolbar>
-      <ion-title size="large">Tab 3</ion-title>
+      <ion-title size="large">Galería</ion-title>
     </ion-toolbar>
   </ion-header>
+  <ion-button shape="round" (click)="choosePictures()">
+    Elegir fotos
+    <ion-icon slot="end" name="pizza-outline"></ion-icon>
+  </ion-button>
+  <ng-container *ngFor="let imageBase64 of imagesInBase64; let i = index">
+    <ion-img src="{{imageBase64}}" alt="Picture_{{i+1}}"></ion-img>
+  </ng-container>
 </ion-content>

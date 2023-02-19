@@ -13,6 +13,8 @@
     "ionic_emulator_android": "npx cap run android --no-open",
     "ionic_build_android": "ionic cap build android --no-open",
     "ionic_run_android": "npm run ionic_build_android && npm run ionic_emulator_android",
+    "ionic_emulator_android_david": "npx cap run android --no-open --target=R58N23CKV3V",
+    "ionic_run_android_david": "npm run ionic_build_android && npm run ionic_emulator_android_david",
     "test": "ng test",
     "lint": "ng lint"
   },
