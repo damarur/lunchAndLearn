@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Platform} from '@ionic/angular';
 import {Camera, GalleryPhoto, GalleryPhotos} from '@capacitor/camera';
 import {Filesystem, ReadFileResult} from '@capacitor/filesystem';
@@ -9,9 +9,10 @@ import {isMobile} from '../util/platform/platform.util';
   templateUrl: 'tab3.page.html',
   styleUrls: ['tab3.page.scss']
 })
-export class Tab3Page {
+export class Tab3Page implements OnInit {
 
   public imagesInBase64 = [];
+  public imagesUrl = [];
 
   constructor(private readonly platform: Platform) {
     if (isMobile(this.platform)) {
@@ -19,8 +20,13 @@ export class Tab3Page {
     }
   }
 
-  async choosePictures() {
+  ngOnInit(): void {
     this.imagesInBase64 = [];
+    this.imagesUrl = [];
+  }
+
+  async choosePictures() {
+    this.ngOnInit();
     await Camera.pickImages({
       quality: 90,
       width: 600,
@@ -30,7 +36,11 @@ export class Tab3Page {
     }).then((galleryPhotos: GalleryPhotos) => {
       galleryPhotos.photos.forEach((photo: GalleryPhoto) => {
         console.log(photo);
-        this.readFile(photo.path);
+        if (isMobile(this.platform)) {
+          this.readFile(photo.path);
+        } else {
+          this.imagesUrl.push(photo.webPath);
+        }
       })
     });
   }

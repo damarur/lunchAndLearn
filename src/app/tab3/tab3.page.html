@@ -19,4 +19,7 @@
   <ng-container *ngFor="let imageBase64 of imagesInBase64; let i = index">
     <ion-img src="{{imageBase64}}" alt="Picture_{{i+1}}"></ion-img>
   </ng-container>
+  <ng-container *ngFor="let imageUrl of imagesUrl; let i = index">
+    <ion-img src="{{imageUrl}}" alt="Picture_{{i+1}}"></ion-img>
+  </ng-container>
 </ion-content>
